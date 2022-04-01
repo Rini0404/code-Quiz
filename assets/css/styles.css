@@ -1,0 +1,9 @@
+
+html {
+  background-color: steelblue;
+}
+
+button { 
+  display: flex;
+  justify-content: center;
+}
