@@ -1,9 +1,9 @@
-
-html {
+:root {
   background-color: steelblue;
-}
+  }
 
-button { 
-  display: flex;
-  justify-content: center;
+.questionCon {
+  width:100px; 
+  height:50px; 
+  background-color: grey; 
 }

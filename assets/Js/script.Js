@@ -1,6 +1,13 @@
-var playN = document.getElementById("#startB"); 
+var playB = document.getElementById("#startB"); 
 var init = document.getElementById("#initials"); 
+document.getElementById("#results")
+var questionBox = document.getElementById("questionsCon")
 
+
+
+var index = 0;
+var timerId; 
+var copyQuestions = []; 
 
 var myQuestions = [
   { 
@@ -37,26 +44,23 @@ var myQuestions = [
 function startGame () { 
   var startGameEl = document.getElementById("startB")
   // lets me hide the starting screen when I accept to start the quiz
-  startScreenEl.setAttribute("class", "hide")
+  playB.classList.add("hide")
+  questionBox.classList.remove("hide")
   // storage for user choices. 
-  var outputs = []; 
-  // question were on and the number of it. 
-  myQuestions.forEach(
-    (questionNum, questionNow) => {
-      // var answer =[]; possible answers
-      for(letter in currentQuestion.answer){
-        answer.push (
-          `<label>`
-        )
-      }
-    }
-  )
+  
 }
 
 
-function showResults(){}
+function questionGrab () {
+  var postedQs = myQuestions[index]; 
+  postedQs.forEach(() => {
+    copyQuestions.push(); 
+    console.log(questionGrab); 
+  });
+}
 
 
 // when ready submit, show results 
 // then add initials 
-submitButton.addEventListener("click", showResults); 
+// startB.addEventListener("click", startGame);
+// submitButton.addEventListener("click", showResults); 
