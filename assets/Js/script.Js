@@ -82,13 +82,6 @@ document.getElementById('quizBody').innerHTML = 'quizBody';
 
 function continueGame() {
   questionIndex ++; //loops
-  if(questionIndex > myQuestions.length - 1){
-    finishGame();
-    console.log(quizBody);
-    return; 
-  }
-    var quizBody = myQuestions[questionIndex].title;
-  console.log(quizBody);
     // add the buttons as choices 
 }
 
