@@ -1,14 +1,14 @@
 var times; 
-
+var timeLeft = 70; 
 
 var timerInterval; 
 var score = 0;
 var index = 0; 
-var questionIndex = 0; 
+var onQuestion = 0; 
 var acttiveTime = document.getElementById('time');
 var questionBody = document.getElementById('questionBody'); 
 var starts  = document.getElementById('startB');
-var timeLeft = 70; 
+console.log(starts);
 var myQuestions = [
   { 
     title: "What devil fruit did Monkey D. Luffy accidently eat?",
@@ -44,11 +44,14 @@ function startGame () {
   document.getElementById('timeLeft').innerHTML = timeLeft;
   times = setInterval(function(){
     timeLeft --; //deduct the time, and start the game counter
-    console.log(timeLeft);
+    timeLeft.textContent = "Time left: " + timeLeft; 
         if (timeLeft <= 0) {
           clearInterval(times);
+          
           finishGame();
+          
         } 
+        console.log(times)
 
   }, 1000); 
   continueGame();
@@ -65,24 +68,55 @@ function clearScore() {
 // add a funtion to show end game results and display. 
 function finishGame () {
   clearInterval(times); // clear the time. no more count 
-   
+  document.getElementById('quizBody').innerHTML = quizBody; 
+  var quizBody = 
+  `<main id="lastScore">
+    <div container class="results">
+      <h2>Finished!</h2>
+      <p>Your score was: '${score}'</p>
+      <p>Enter your Name:<span placeholder="Input here" id="name"></span></p> 
+    </div>
+  </main>`
 
 }
 
 function gameResets() {
   clearInterval(times); // clear the time
-  myQuestions.textContent
+  document.getElementById('timeLeft').innerHTML = timeLeft; 
   // set all vars to 0 or null to do full reset. 
   timeLeft = 0;
   score = 0;
-  questionIndex = 0; 
+  onQuestion = 0; 
   times = null;
 document.getElementById('quizBody').innerHTML = 'quizBody';
 }
 
 function continueGame() {
-  questionIndex ++; //loops
+  onQuestion ++; //loops
+  if(onQuestion > myQuestions.length - 1){
+    finishGame();
+    console.log(quizBody);
+    return; 
+  }
+    var quizBody = myQuestions[onQuestion].title;
+  console.log(quizBody);
     // add the buttons as choices 
+  for (var loops = 0; loops < myQuestions[onQuestion].length; loops++) {
+    var btnCs = "<button onClick ='answer'>choice</button>"
+    btnCs = btnCs.replace("choice", myQuestions[onQuestion].lenght[loops]);
+    console.log(btnCs);
+    if (myQuestions[onQuestion].options[loops] == myQuestions[onQuestion].answer) { 
+      btnCs = btnCs.replace("answer", "correct()");
+
+    }else { 
+      btnCs = btnCs.replace("answer","wrong()");
+    }
+    quizBody += btnCs; 
+  }
+
+
+  document.getElementById('quizBody').innerHTML = quizBody; 
+  
 }
 
   // we need to add html in Js to open up the start of the quiz. 
@@ -95,6 +129,17 @@ function continueGame() {
 
   function grabScores(){
     document.getElementById('quizBody').innerHtml = quizBody; 
+    var quizBody = 
+    `<main id="highScores"> 
+      <h2>Top scores</h2>
+      <h2> + localStorage.getItem('bestScore') + </h2>
+      <h1>  + localStorage.getItem('scoreName') + </h1>
+
+      <button class = "again" onClick = "restartGame()">Again</button>
+      <button class = "clear" onClick = "resetScore">Reset Score</button>
+      </main>`
+    
+  
   }
 
 // correct/ wrong 
