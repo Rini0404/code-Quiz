@@ -18,9 +18,18 @@
     <h3 style = "text-align:center;">Good Luck...</h3>
     <div id="questionDiv">
       <ul id="choicesUl"></ul>
-    <button style="text-align:center;" id="startB" type="button">Start The Quiz</button>
+    <button style="text-align:center;" id="startB" type="button" onclick="hideButton">Start The Quiz</button>
+    <script>
+      function hideButton(x)
+       {
+        x.style.display = 'none';
+       }
+      </script>
 
-
+    <section id="questions" class="hide">
+      <h2 id="q-title"></h2>
+      <div id="choices" class="choices"></div>
+  </section>
     
 
     <main id="lastScore">

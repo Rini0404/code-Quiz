@@ -6,9 +6,10 @@ var score = 0;
 var index = 0; 
 var questionIndex = 0; 
 var acttiveTime = document.getElementById('time');
+var questionsEl = document.getElementById('questions');
 var questionBody = document.getElementById('questionBody'); 
 var starts  = document.getElementById('startB');
-var questionDiv = document.getElementById('questionDiv');
+var questionDiv = document.getElementById('choicesUl');
 console.log(starts);
 var myQuestions = [
   { 
@@ -42,8 +43,9 @@ var myQuestions = [
 ]
 
 function startGame () {
-  document.getElementById('timeLeft').innerHTML = timeLeft;
+  
   times = setInterval(function(){
+    document.getElementById('timeLeft').innerHTML = timeLeft;
     timeLeft --; //deduct the time, and start the game counter
     timeLeft.textContent = timeLeft; 
         if (timeLeft <= 0) {
@@ -53,7 +55,6 @@ function startGame () {
           
         } 
         console.log(times)
-
   }, 1000); 
   continueGame();
 }
@@ -93,21 +94,16 @@ function continueGame() {
     var quizBody = myQuestions[questionIndex].title;
   console.log(quizBody);
     // add the buttons as choices 
-  for (var i = 0; i < myQuestions[questionIndex].length; i++) {
     var userQuestion = myQuestions[questionIndex].title; 
     var userChoices = myQuestions[questionIndex].choices;
     questionDiv.textContent = userQuestion; 
 
-  }
+  console.log(userChoices);
   userChoices.forEach(function (newItem) {
     var listItem = document.createElement("li");
-    listItem.textContent = newItem;
-    questionDiv.appendChild(ulCreate);
-    ulCreate.appendChild(listItem);
-    listItem.addEventListener("click", (compare));
-})
-  document.getElementById('quizBody').innerHTML = quizBody; 
-  
+    listItem.textContent = newItem; 
+    questionDiv.appendChild(listItem);
+})  
 }
 
   // we need to add html in Js to open up the start of the quiz. 
@@ -116,21 +112,6 @@ function continueGame() {
     localStorage.setItem('bestScore', score ); 
     localStorage.setItem('scoreName', document.getElementById('names')); 
     grabResults(); 
-  }
-
-  function grabScores(){
-    document.getElementById('quizBody').innerHtml = quizBody; 
-    var quizBody = 
-    `<main id="highScores"> 
-      <h2>Top scores</h2>
-      <h2> + localStorage.getItem('bestScore') + </h2>
-      <h1>  + localStorage.getItem('scoreName') + </h1>
-
-      <button class = "again" onClick = "restartGame()">Again</button>
-      <button class = "clear" onClick = "resetScore">Reset Score</button>
-      </main>`
-    
-  
   }
 
 // correct/ wrong 
