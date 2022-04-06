@@ -4,10 +4,11 @@ var timeLeft = 70;
 var timerInterval; 
 var score = 0;
 var index = 0; 
-var onQuestion = 0; 
+var questionIndex = 0; 
 var acttiveTime = document.getElementById('time');
 var questionBody = document.getElementById('questionBody'); 
 var starts  = document.getElementById('startB');
+var questionDiv = document.getElementById('questionDiv');
 console.log(starts);
 var myQuestions = [
   { 
@@ -44,7 +45,7 @@ function startGame () {
   document.getElementById('timeLeft').innerHTML = timeLeft;
   times = setInterval(function(){
     timeLeft --; //deduct the time, and start the game counter
-    timeLeft.textContent = "Time left: " + timeLeft; 
+    timeLeft.textContent = timeLeft; 
         if (timeLeft <= 0) {
           clearInterval(times);
           
@@ -68,15 +69,6 @@ function clearScore() {
 // add a funtion to show end game results and display. 
 function finishGame () {
   clearInterval(times); // clear the time. no more count 
-  document.getElementById('quizBody').innerHTML = quizBody; 
-  var quizBody = 
-  `<main id="lastScore">
-    <div container class="results">
-      <h2>Finished!</h2>
-      <p>Your score was: '${score}'</p>
-      <p>Enter your Name:<span placeholder="Input here" id="name"></span></p> 
-    </div>
-  </main>`
 
 }
 
@@ -86,35 +78,34 @@ function gameResets() {
   // set all vars to 0 or null to do full reset. 
   timeLeft = 0;
   score = 0;
-  onQuestion = 0; 
+  questionIndex = 0; 
   times = null;
 document.getElementById('quizBody').innerHTML = 'quizBody';
 }
 
 function continueGame() {
-  onQuestion ++; //loops
-  if(onQuestion > myQuestions.length - 1){
+  questionIndex ++; //loops
+  if(questionIndex > myQuestions.length - 1){
     finishGame();
     console.log(quizBody);
     return; 
   }
-    var quizBody = myQuestions[onQuestion].title;
+    var quizBody = myQuestions[questionIndex].title;
   console.log(quizBody);
     // add the buttons as choices 
-  for (var loops = 0; loops < myQuestions[onQuestion].length; loops++) {
-    var btnCs = "<button onClick ='answer'>choice</button>"
-    btnCs = btnCs.replace("choice", myQuestions[onQuestion].lenght[loops]);
-    console.log(btnCs);
-    if (myQuestions[onQuestion].options[loops] == myQuestions[onQuestion].answer) { 
-      btnCs = btnCs.replace("answer", "correct()");
+  for (var i = 0; i < myQuestions[questionIndex].length; i++) {
+    var userQuestion = myQuestions[questionIndex].title; 
+    var userChoices = myQuestions[questionIndex].choices;
+    questionDiv.textContent = userQuestion; 
 
-    }else { 
-      btnCs = btnCs.replace("answer","wrong()");
-    }
-    quizBody += btnCs; 
   }
-
-
+  userChoices.forEach(function (newItem) {
+    var listItem = document.createElement("li");
+    listItem.textContent = newItem;
+    questionDiv.appendChild(ulCreate);
+    ulCreate.appendChild(listItem);
+    listItem.addEventListener("click", (compare));
+})
   document.getElementById('quizBody').innerHTML = quizBody; 
   
 }
