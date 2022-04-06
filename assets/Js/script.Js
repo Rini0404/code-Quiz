@@ -44,12 +44,14 @@ function startGame () {
   document.getElementById('timeLeft').innerHTML = timeLeft;
   times = setInterval(function(){
     timeLeft --; //deduct the time, and start the game counter
-      document.getElementById('timeLeft').innerHTML = timeLeft; // for html 
         if (timeLeft <= 0) {
           clearInterval(times);
+          
           finishGame();
           
         } 
+        console.log(times)
+
   }, 1000); 
   continueGame();
 }
@@ -85,39 +87,35 @@ function gameResets() {
   score = 0;
   onQuestion = 0; 
   times = null;
-
-  var quizBody = 
-  `<main id="start">
-    <h1 style="text-align: center;">Hello! Welcome to my Quiz!</h1>
-      <h3 style = "text-align: center; ">Simple answer these questions, you will be asked a series of questions and you must answer them to your best ability</h3>
-      <h5 style = "text-align: center;">Good Luck!</h5>
-      <button type = "button" onClick = "startGame">Start Game.</button>
-  </main>`
 document.getElementById('quizBody').innerHTML = 'quizBody';
 }
 
 function continueGame() {
   onQuestion ++; //loops
   if(onQuestion > myQuestions.length - 1){
-    finishGame(); 
+    finishGame();
+    console.log(quizBody);
     return; 
   }
-    var quizBody = `<h2> ${myQuestions[onQuestion]}.title</h2>`
+    var quizBody = myQuestions[onQuestion].title;
+  console.log(quizBody);
     // add the buttons as choices 
   for (var loops = 0; loops < myQuestions[onQuestion].length; loops++) {
-    var btnCs = "<button onClick =\"[answer]\">[choice]</button>"
-    btnCs = btnCs.replace("[choice]", myQuestions[onQuestion].options[loops]);
+    var btnCs = "<button onClick ='answer'>choice</button>"
+    btnCs = btnCs.replace("choice", myQuestions[onQuestion].lenght[loops]);
+    console.log(btnCs);
     if (myQuestions[onQuestion].options[loops] == myQuestions[onQuestion].answer) { 
-      btnCs = btnCs.replace("[answer]", "correct()");
+      btnCs = btnCs.replace("answer", "correct()");
 
     }else { 
-      btnCs = btnCs.replace("[answer]","wrong()");
+      btnCs = btnCs.replace("answer","wrong()");
     }
     quizBody += btnCs; 
   }
 
 
   document.getElementById('quizBody').innerHTML = quizBody; 
+  
 }
 
   // we need to add html in Js to open up the start of the quiz. 
