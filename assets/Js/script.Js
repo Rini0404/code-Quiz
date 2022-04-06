@@ -5,10 +5,10 @@ var timerInterval;
 var score = 0;
 var index = 0; 
 var onQuestion = 0; 
-var acttiveTime = document.getElementById('#time');
-var questionBody = document.getElementById('#questionBody'); 
-var starts = document.getElementById('#startB');
-
+var acttiveTime = document.getElementById('time');
+var questionBody = document.getElementById('questionBody'); 
+var starts  = document.getElementById('startB');
+console.log(starts);
 var myQuestions = [
   { 
     title: "What devil fruit did Monkey D. Luffy accidently eat?",
@@ -51,11 +51,8 @@ function startGame () {
           
         } 
   }, 1000); 
-  console.log(startGame)
   continueGame();
 }
-
-
 
 // to clear all local data, for score calculation
 function clearScore() {
@@ -88,7 +85,7 @@ function gameResets() {
   score = 0;
   onQuestion = 0; 
   times = null;
- 
+
   var quizBody = 
   `<main id="start">
     <h1 style="text-align: center;">Hello! Welcome to my Quiz!</h1>
@@ -96,7 +93,7 @@ function gameResets() {
       <h5 style = "text-align: center;">Good Luck!</h5>
       <button type = "button" onClick = "startGame">Start Game.</button>
   </main>`
- document.getElementById('quizBody').innerHTML = 'quizBody';
+document.getElementById('quizBody').innerHTML = 'quizBody';
 }
 
 function continueGame() {
@@ -107,7 +104,7 @@ function continueGame() {
   }
     var quizBody = `<h2> ${myQuestions[onQuestion]}.title</h2>`
     // add the buttons as choices 
-  for (var loops = 0; loops < myQuestions[onQuestion].options.length; loops++) {
+  for (var loops = 0; loops < myQuestions[onQuestion].length; loops++) {
     var btnCs = "<button onClick =\"[answer]\">[choice]</button>"
     btnCs = btnCs.replace("[choice]", myQuestions[onQuestion].options[loops]);
     if (myQuestions[onQuestion].options[loops] == myQuestions[onQuestion].answer) { 
@@ -158,4 +155,4 @@ function correct() {
   continueGame();
 }
 
-starts.addEventListener("click", function startGame(){})
+starts.addEventListener("click", startGame)
