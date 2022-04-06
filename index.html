@@ -7,15 +7,27 @@
   <link rel="stylesheet" href="./assets/css/styles.css">
   <title>One Piece Quiz</title>
 </head>
-<body>
+<body>  
+  
+
     <main style="text-align:center;">
     <div id="quizBody">
+      <aside class="timer">Time: <span id="timeLeft">0</span></aside>
     <section>
     <h5 style = "text-align:center;">Answer the questions!</h5>
     <h3 style = "text-align:center;">Good Luck...</h3>
     <button style="text-align:center;" id="startB" type="button">Start The Quiz</button>
+    
 
-    <div id="timeLeft"></div>
+    <main id="lastScore">
+      <div container class="results">
+        <h2>Finished!</h2>
+        <p>Your score was: </p>
+        <p>Enter your Name:<span placeholder="Input here" id="name"></span></p> 
+      </div>
+    </main>
+  
+
 </div>
  <button id="results">Show Results</button>
 </section>
